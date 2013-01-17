@@ -1,0 +1,13 @@
+{
+  "manifest_version": 2,
+  "name": "File selector test",
+  "version": "1",
+  "minimum_chrome_version": "23",
+  "permissions": [
+  ],
+  "app": {
+    "background": {
+      "scripts": ["test.js"]
+    }
+  }
+}
