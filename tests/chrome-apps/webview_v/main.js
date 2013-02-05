@@ -14,5 +14,9 @@ window.onload = function() {
   });
   webview.addEventListener('foobar', function(e) {
     LOG('::fooevent');
+    LOG('e.a = ' + e.a);
+    e.a();
+    LOG('e.b = ' + e.b);
+    e.b();
   });
 };
