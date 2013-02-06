@@ -1,0 +1,1 @@
+builddir_name=.\tmp-llvm GYP_PARALLEL=1 PATH=.\third_party\llvm-build\Release+Asserts\bin:%PATH% GYP_GENERATORS='ninja' BUILDTYPE=Debug .\build\gyp_chromium -Goutput_dir=out -D"component=shared_library" -D"clang=1" -D"remove_webcore_debug_symbols=1" -D"disable_nacl=1" -D"enable_svg=0"
