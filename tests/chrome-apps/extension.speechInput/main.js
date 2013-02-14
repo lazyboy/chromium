@@ -30,10 +30,12 @@ var startSpeechInputTest = function(e) {
 };
 
 var recognitionSuccess = function(result) {
+  LOG('recognitionSuccess');
   LOG('recognized: ' + result.hypotheses[0].utterance + "' with confidence " + result.hypotheses[0].confidence);
 };
 
 var recognitionFailure = function(e) {
+  LOG('recognitionFailure');
   LOG('Speech input failed: ' + e.code);
 };
 
