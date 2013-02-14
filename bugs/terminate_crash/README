@@ -1,0 +1,3 @@
+webkitAnimationIteration bug test case for platform app.
+on Mac OSX, turn off "GPU Compositing in all pages"
+Load the app, you might see that the red rectangle stopped/froze in the middle, resize the app, you'll see the correct final rendering.
