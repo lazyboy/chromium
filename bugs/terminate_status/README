@@ -1,0 +1,9 @@
+Test app for checking browser plugin renderer NOTREACHED/crash BrowserPlugin::OnGuestGone() {gets termination status = TERMINATION_STATUS_STILL_RUNNING}
+
+Reproduce steps: (hard to reproduce)
+I've only found this is OSX, haven't tried to repro it on other platforms.
+
+1. Open this app, this has lots of guests.
+2. Click on "Terminate" button and immediately close the app using Command+w.
+3. Repeat 1-2 until you see the app crash as NOTREACHED is reached (pun) in BrowserPlugin::OnGuestGone.
+
