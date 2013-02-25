@@ -168,7 +168,7 @@ index b781d52..5b2f2cb 100644
    ReloadEmbedderTestHelper();
  }
 diff --git a/content/browser/web_contents/web_contents_view_aura.cc b/content/browser/web_contents/web_contents_view_aura.cc
-index c4505c1..6bebecd 100644
+index c4505c1..a2ab857 100644
 --- a/content/browser/web_contents/web_contents_view_aura.cc
 +++ b/content/browser/web_contents/web_contents_view_aura.cc
 @@ -755,11 +755,15 @@ class WebContentsViewAura::WindowObserver
@@ -197,7 +197,7 @@ index c4505c1..6bebecd 100644
 +  virtual void Observe(int type,
 +                       const NotificationSource& source,
 +                       const NotificationDetails& details) OVERRIDE {
-+    DHECK_EQ(NOTIFICATION_WEB_CONTENTS_DESTROYED, type);
++    DCHECK_EQ(NOTIFICATION_WEB_CONTENTS_DESTROYED, type);
 +    web_contents_destroyed_ = true;
 +  }
 +
