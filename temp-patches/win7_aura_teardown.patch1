@@ -1,0 +1,161 @@
+diff --git a/chrome/browser/extensions/web_view_browsertest.cc b/chrome/browser/extensions/web_view_browsertest.cc
+index d1d78e9..45f6378 100644
+--- a/chrome/browser/extensions/web_view_browsertest.cc
++++ b/chrome/browser/extensions/web_view_browsertest.cc
+@@ -54,6 +54,7 @@ class WebViewTest : public extensions::PlatformAppBrowserTest {
+ 
+   virtual void TearDown() OVERRIDE {
+     // SpeechRecognition test specific TearDown.
++    printf("++++ %s\n", __PRETTY_FUNCTION__);
+     const testing::TestInfo* const test_info =
+         testing::UnitTest::GetInstance()->current_test_info();
+     if (!strcmp(test_info->name(), "SpeechRecognition"))
+@@ -709,3 +710,16 @@ IN_PROC_BROWSER_TEST_F(WebViewTest, SpeechRecognition) {
+   title_watcher.AlsoWaitForTitle(error_title);
+   EXPECT_EQ(expected_title, title_watcher.WaitAndGetTitle());
+ }
++
++IN_PROC_BROWSER_TEST_F(WebViewTest, TearDown) {
++  ExtensionTestMessageListener guest_loaded_listener("guest-loaded", false);
++  LoadAndLaunchPlatformApp("web_view/teardown");
++  ASSERT_TRUE(guest_loaded_listener.WaitUntilSatisfied());
++  LoadAndLaunchPlatformApp("web_view/teardown");
++  ASSERT_TRUE(guest_loaded_listener.WaitUntilSatisfied());
++  /*
++  ExtensionTestMessageListener guest2_listener("guest-two-loaded", false);
++  LoadAndLaunchPlatformApp("web_view/teardown/two");
++  ASSERT_TRUE(guest_loaded_listener.WaitUntilSatisfied());
++  */
++}
+diff --git a/chrome/test/data/extensions/platform_apps/web_view/teardown/main.html b/chrome/test/data/extensions/platform_apps/web_view/teardown/main.html
+new file mode 100644
+index 0000000..0d40a67
+--- /dev/null
++++ b/chrome/test/data/extensions/platform_apps/web_view/teardown/main.html
+@@ -0,0 +1,12 @@
++<!--
++ * Copyright 2013 The Chromium Authors. All rights reserved.  Use of this
++ * source code is governed by a BSD-style license that can be found in the
++ * LICENSE file.
++-->
++<html>
++<body>
++  <webview src="data:text/html,hello world"
++      style="width: 300px; height: 200px"></webview>
++  <script src="main.js"></script>
++</body>
++</html>
+diff --git a/chrome/test/data/extensions/platform_apps/web_view/teardown/main.js b/chrome/test/data/extensions/platform_apps/web_view/teardown/main.js
+new file mode 100644
+index 0000000..a14b776
+--- /dev/null
++++ b/chrome/test/data/extensions/platform_apps/web_view/teardown/main.js
+@@ -0,0 +1,8 @@
++// Copyright 2013 The Chromium Authors. All rights reserved.
++// Use of this source code is governed by a BSD-style license that can be
++// found in the LICENSE file.
++
++onload = function() {
++  window.console.log('**** sending guest-loaded');
++  chrome.test.sendMessage('guest-loaded');
++};
+diff --git a/chrome/test/data/extensions/platform_apps/web_view/teardown/manifest.json b/chrome/test/data/extensions/platform_apps/web_view/teardown/manifest.json
+new file mode 100644
+index 0000000..058c9d5
+--- /dev/null
++++ b/chrome/test/data/extensions/platform_apps/web_view/teardown/manifest.json
+@@ -0,0 +1,12 @@
++{
++  "name": "<webview> teardown test.",
++  "version": "1",
++  "permissions": [
++    "webview"
++  ],
++  "app": {
++    "background": {
++      "scripts": ["test.js"]
++    }
++  }
++}
+diff --git a/chrome/test/data/extensions/platform_apps/web_view/teardown/test.js b/chrome/test/data/extensions/platform_apps/web_view/teardown/test.js
+new file mode 100644
+index 0000000..2f9f855
+--- /dev/null
++++ b/chrome/test/data/extensions/platform_apps/web_view/teardown/test.js
+@@ -0,0 +1,7 @@
++// Copyright 2013 The Chromium Authors. All rights reserved.
++// Use of this source code is governed by a BSD-style license that can be
++// found in the LICENSE file.
++
++chrome.app.runtime.onLaunched.addListener(function() {
++  chrome.app.window.create('main.html', {}, function () {});
++});
+diff --git a/content/browser/web_contents/web_contents_view_aura.cc b/content/browser/web_contents/web_contents_view_aura.cc
+index c4505c1..6bebecd 100644
+--- a/content/browser/web_contents/web_contents_view_aura.cc
++++ b/content/browser/web_contents/web_contents_view_aura.cc
+@@ -755,11 +755,15 @@ class WebContentsViewAura::WindowObserver
+ // Constrained windows are added as children of the WebContent's view which may
+ // overlap with windowed NPAPI plugins. In that case, tell the RWHV so that it
+ // can update the plugins' cutout rects accordingly.
+-class WebContentsViewAura::ChildWindowObserver : public aura::WindowObserver {
++class WebContentsViewAura::ChildWindowObserver : public aura::WindowObserver,
++                                                 public NotificationObserver {
+  public:
+   explicit ChildWindowObserver(WebContentsViewAura* view)
+-      : view_(view) {
++      : view_(view),
++        web_contents_destroyed_(false) {
+     view_->window_->AddObserver(this);
++    registrar_.Add(this, NOTIFICATION_WEB_CONTENTS_DESTROYED,
++                   Source<WebContents>(view_->web_contents_));
+   }
+ 
+   virtual ~ChildWindowObserver() {
+@@ -799,11 +803,22 @@ class WebContentsViewAura::ChildWindowObserver : public aura::WindowObserver {
+     }
+   }
+ 
++  // NotificationObserver
++  virtual void Observe(int type,
++                       const NotificationSource& source,
++                       const NotificationDetails& details) OVERRIDE {
++    DHECK_EQ(NOTIFICATION_WEB_CONTENTS_DESTROYED, type);
++    web_contents_destroyed_ = true;
++  }
++
+  private:
+   void UpdateConstrainedWindows(aura::Window* exclude) {
+     if (RenderViewHostFactory::has_factory())
+       return;  // Can't cast to RenderWidgetHostViewAura in unit tests.
+ 
++    if (web_contents_destroyed_)
++      return;
++
+     RenderWidgetHostViewAura* view = static_cast<RenderWidgetHostViewAura*>(
+         view_->web_contents_->GetRenderWidgetHostView());
+     if (!view)
+@@ -818,8 +833,10 @@ class WebContentsViewAura::ChildWindowObserver : public aura::WindowObserver {
+ 
+     view->UpdateConstrainedWindowRects(constrained_windows);
+   }
+-
++ 
++  NotificationRegistrar registrar_;
+   WebContentsViewAura* view_;
++  bool web_contents_destroyed_;
+ 
+   DISALLOW_COPY_AND_ASSIGN(ChildWindowObserver);
+ };
+diff --git a/content/browser/web_contents/web_contents_view_gtk.cc b/content/browser/web_contents/web_contents_view_gtk.cc
+index 7c66835..18c93ac 100644
+--- a/content/browser/web_contents/web_contents_view_gtk.cc
++++ b/content/browser/web_contents/web_contents_view_gtk.cc
+@@ -105,6 +105,7 @@ WebContentsViewGtk::WebContentsViewGtk(
+ }
+ 
+ WebContentsViewGtk::~WebContentsViewGtk() {
++  printf("++++ %s\n", __PRETTY_FUNCTION__);
+   expanded_.Destroy();
+ }
+ 
