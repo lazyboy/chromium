@@ -1,0 +1,225 @@
+diff --git a/chrome/browser/extensions/web_view_browsertest.cc b/chrome/browser/extensions/web_view_browsertest.cc
+index d1d78e9..0611459 100644
+--- a/chrome/browser/extensions/web_view_browsertest.cc
++++ b/chrome/browser/extensions/web_view_browsertest.cc
+@@ -15,6 +15,7 @@
+ #include "chrome/test/base/test_launcher_utils.h"
+ #include "content/public/browser/notification_service.h"
+ #include "content/public/browser/render_process_host.h"
++#include "content/public/common/content_switches.h"
+ #include "content/public/test/browser_test_utils.h"
+ #include "content/public/test/fake_speech_recognition_manager.h"
+ #include "ui/compositor/compositor_setup.h"
+@@ -32,6 +33,11 @@ class WebViewTest : public extensions::PlatformAppBrowserTest {
+           command_line, gfx::kGLImplementationOSMesaName)) <<
+           "kUseGL must not be set by test framework code!";
+ #endif
++
++    const testing::TestInfo* const test_info =
++        testing::UnitTest::GetInstance()->current_test_info();
++    if (EndsWith(test_info->name(), "_UseGuestViews", true))
++        command_line->AppendSwitch(switches::kEnableBrowserPluginGuestViews);
+   }
+ 
+   virtual void SetUp() OVERRIDE {
+@@ -239,6 +245,24 @@ class WebViewTest : public extensions::PlatformAppBrowserTest {
+     EXPECT_EQ(expected_title, title_watcher.WaitAndGetTitle());
+   }
+ 
++  // Following test helper function is used in two tests: |TearDownTest| and
++  // |TearDownTest_UseGuestViews|.
++  // This test ensures that the teardown path for an app with <webview> works
++  // correctly.
++  void TearDownTestHelper() {
++    ExtensionTestMessageListener first_loaded_listener("guest-loaded", false);
++    const extensions::Extension* extension =
++        LoadAndLaunchPlatformApp("web_view/teardown");
++    ShellWindow* window = CreateShellWindow(extension);
++    ASSERT_TRUE(first_loaded_listener.WaitUntilSatisfied());
++    CloseShellWindow(window);
++
++    // Load the app again.
++    ExtensionTestMessageListener second_loaded_listener("guest-loaded", false);
++    LoadAndLaunchPlatformApp("web_view/teardown");
++    ASSERT_TRUE(second_loaded_listener.WaitUntilSatisfied());
++  }
++
+   scoped_ptr<content::FakeSpeechRecognitionManager>
+       fake_speech_recognition_manager_;
+ };
+@@ -709,3 +733,12 @@ IN_PROC_BROWSER_TEST_F(WebViewTest, SpeechRecognition) {
+   title_watcher.AlsoWaitForTitle(error_title);
+   EXPECT_EQ(expected_title, title_watcher.WaitAndGetTitle());
+ }
++
++IN_PROC_BROWSER_TEST_F(WebViewTest, TearDownTest) {
++  TearDownTestHelper();
++}
++
++IN_PROC_BROWSER_TEST_F(WebViewTest, TearDownTest_UseGuestViews) {
++  // switches::kEnableBrowserPluginGuestViews is on for this test.
++  TearDownTestHelper();
++}
+diff --git a/chrome/test/data/extensions/platform_apps/web_view/teardown/main.html b/chrome/test/data/extensions/platform_apps/web_view/teardown/main.html
+new file mode 100644
+index 0000000..43f0b67
+--- /dev/null
++++ b/chrome/test/data/extensions/platform_apps/web_view/teardown/main.html
+@@ -0,0 +1,10 @@
++<!--
++ * Copyright 2013 The Chromium Authors. All rights reserved.  Use of this
++ * source code is governed by a BSD-style license that can be found in the
++ * LICENSE file.
++-->
++<html>
++<body>
++  <script src="main.js"></script>
++</body>
++</html>
+diff --git a/chrome/test/data/extensions/platform_apps/web_view/teardown/main.js b/chrome/test/data/extensions/platform_apps/web_view/teardown/main.js
+new file mode 100644
+index 0000000..6e8ff3a
+--- /dev/null
++++ b/chrome/test/data/extensions/platform_apps/web_view/teardown/main.js
+@@ -0,0 +1,13 @@
++// Copyright 2013 The Chromium Authors. All rights reserved.
++// Use of this source code is governed by a BSD-style license that can be
++// found in the LICENSE file.
++
++onload = function() {
++  var webview = document.createElement('webview');
++  webview.addEventListener('loadstop', function(e) {
++    chrome.test.sendMessage('guest-loaded');
++  });
++  webview.setAttribute(
++      'src', 'data:text/html,<html><body>tear down test</body></html>');
++  document.body.appendChild(webview);
++};
+diff --git a/chrome/test/data/extensions/platform_apps/web_view/teardown/manifest.json b/chrome/test/data/extensions/platform_apps/web_view/teardown/manifest.json
+new file mode 100644
+index 0000000..058c9d5
+--- /dev/null
++++ b/chrome/test/data/extensions/platform_apps/web_view/teardown/manifest.json
+@@ -0,0 +1,12 @@
++{
++  "name": "<webview> teardown test.",
++  "version": "1",
++  "permissions": [
++    "webview"
++  ],
++  "app": {
++    "background": {
++      "scripts": ["test.js"]
++    }
++  }
++}
+diff --git a/chrome/test/data/extensions/platform_apps/web_view/teardown/test.js b/chrome/test/data/extensions/platform_apps/web_view/teardown/test.js
+new file mode 100644
+index 0000000..2f9f855
+--- /dev/null
++++ b/chrome/test/data/extensions/platform_apps/web_view/teardown/test.js
+@@ -0,0 +1,7 @@
++// Copyright 2013 The Chromium Authors. All rights reserved.
++// Use of this source code is governed by a BSD-style license that can be
++// found in the LICENSE file.
++
++chrome.app.runtime.onLaunched.addListener(function() {
++  chrome.app.window.create('main.html', {}, function () {});
++});
+diff --git a/content/browser/browser_plugin/browser_plugin_host_browsertest.cc b/content/browser/browser_plugin/browser_plugin_host_browsertest.cc
+index b781d52..5b2f2cb 100644
+--- a/content/browser/browser_plugin/browser_plugin_host_browsertest.cc
++++ b/content/browser/browser_plugin/browser_plugin_host_browsertest.cc
+@@ -488,17 +488,8 @@ IN_PROC_BROWSER_TEST_F(BrowserPluginHostTest, EmbedderChangedAfterSwap) {
+   EmbedderChangedAfterSwapTestHelper();
+ }
+ 
+-// TODO(lazyboy): Make this test pass on win aura trybots:
+-// http://crbug.com/177222.
+-#if defined(OS_WIN) && defined(USE_AURA)
+-#define MAYBE_EmbedderChangedAfterSwap_UseGuestViews \
+-        DISABLED_EmbedderChangedAfterSwap_UseGuestViews
+-#else
+-#define MAYBE_EmbedderChangedAfterSwap_UseGuestViews \
+-        EmbedderChangedAfterSwap_UseGuestViews
+-#endif
+ IN_PROC_BROWSER_TEST_F(BrowserPluginHostTest,
+-                       MAYBE_EmbedderChangedAfterSwap_UseGuestViews) {
++                       EmbedderChangedAfterSwap_UseGuestViews) {
+   // kEnableBrowserPluginGuestViews is turned on for this test.
+   EmbedderChangedAfterSwapTestHelper();
+ }
+@@ -738,15 +729,7 @@ IN_PROC_BROWSER_TEST_F(BrowserPluginHostTest, ReloadEmbedder) {
+   ReloadEmbedderTestHelper();
+ }
+ 
+-// TODO(lazyboy): Make this test pass on win aura trybots:
+-// http://crbug.com/177222.
+-#if defined(OS_WIN) && defined(USE_AURA)
+-#define MAYBE_ReloadEmbedder_UseGuestViews DISABLED_ReloadEmbedder_UseGuestViews
+-#else
+-#define MAYBE_ReloadEmbedder_UseGuestViews ReloadEmbedder_UseGuestViews
+-#endif
+-IN_PROC_BROWSER_TEST_F(BrowserPluginHostTest,
+-                       MAYBE_ReloadEmbedder_UseGuestViews) {
++IN_PROC_BROWSER_TEST_F(BrowserPluginHostTest, ReloadEmbedder_UseGuestViews) {
+   // kEnableBrowserPluginGuestViews is turned on for this test.
+   ReloadEmbedderTestHelper();
+ }
+diff --git a/content/browser/web_contents/web_contents_view_aura.cc b/content/browser/web_contents/web_contents_view_aura.cc
+index c4505c1..902b730 100644
+--- a/content/browser/web_contents/web_contents_view_aura.cc
++++ b/content/browser/web_contents/web_contents_view_aura.cc
+@@ -24,6 +24,7 @@
+ #include "content/public/browser/render_widget_host.h"
+ #include "content/public/browser/render_widget_host_view.h"
+ #include "content/public/browser/web_contents_delegate.h"
++#include "content/public/browser/web_contents_observer.h"
+ #include "content/public/browser/web_contents_view_delegate.h"
+ #include "content/public/browser/web_drag_dest_delegate.h"
+ #include "third_party/WebKit/Source/WebKit/chromium/public/WebInputEvent.h"
+@@ -755,10 +756,13 @@ class WebContentsViewAura::WindowObserver
+ // Constrained windows are added as children of the WebContent's view which may
+ // overlap with windowed NPAPI plugins. In that case, tell the RWHV so that it
+ // can update the plugins' cutout rects accordingly.
+-class WebContentsViewAura::ChildWindowObserver : public aura::WindowObserver {
++class WebContentsViewAura::ChildWindowObserver : public aura::WindowObserver,
++                                                 public WebContentsObserver {
+  public:
+-  explicit ChildWindowObserver(WebContentsViewAura* view)
+-      : view_(view) {
++  ChildWindowObserver(WebContentsViewAura* view)
++      : WebContentsObserver(view->web_contents_),
++        view_(view),
++        web_contents_destroyed_(false) {
+     view_->window_->AddObserver(this);
+   }
+ 
+@@ -799,11 +803,19 @@ class WebContentsViewAura::ChildWindowObserver : public aura::WindowObserver {
+     }
+   }
+ 
++  // Overridden from WebContentsObserver:
++  virtual void WebContentsDestroyed(WebContents* web_contents) OVERRIDE {
++    web_contents_destroyed_ = true;
++  }
++
+  private:
+   void UpdateConstrainedWindows(aura::Window* exclude) {
+     if (RenderViewHostFactory::has_factory())
+       return;  // Can't cast to RenderWidgetHostViewAura in unit tests.
+ 
++    if (web_contents_destroyed_)
++      return;
++
+     RenderWidgetHostViewAura* view = static_cast<RenderWidgetHostViewAura*>(
+         view_->web_contents_->GetRenderWidgetHostView());
+     if (!view)
+@@ -820,6 +832,7 @@ class WebContentsViewAura::ChildWindowObserver : public aura::WindowObserver {
+   }
+ 
+   WebContentsViewAura* view_;
++  bool web_contents_destroyed_;
+ 
+   DISALLOW_COPY_AND_ASSIGN(ChildWindowObserver);
+ };
