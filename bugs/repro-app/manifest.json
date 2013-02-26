@@ -1,0 +1,17 @@
+{
+  "manifest_version": 2,
+
+  "name": "Reproduce bugs",
+  "description": "This app is a shell I use to reproduce bugs.",
+  "version": "1.0",
+
+  "permissions": [
+    "webview"
+  ],
+
+  "app": {
+    "background": {
+      "scripts": ["main.js"]
+    }
+  }
+}
