@@ -1,0 +1,22 @@
+<html>
+<head>
+<title>document.register test</title>
+<script type="text/javascript" src="customelement1.js"></script>
+<style type="text/css">.log{font-size: 11px;}</style>
+</head>
+<body>
+  <div>document.register test</div>
+  <div id="x-webview-container"></div>
+
+  <div id="log" class="log">
+    <div>Logs</div>
+  </div>
+
+  <script>
+    startTest();
+  </script>
+  <x-webview-ctor src="foobar"></x-webview-ctor>
+  <x-webview-ctor src="foobar"></x-webview-ctor>
+  <script>startTestThree();</script>
+</body>
+</html>
