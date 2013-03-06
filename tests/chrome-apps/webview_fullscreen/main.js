@@ -35,10 +35,23 @@ var goFullscreen = function() {
   }
 };
 
+var exitFullscreen = function() {
+  var elem = document.getElementById('efullscreen');
+  if (elem) {
+    //LOG('call elem.webkitCancelFullScreen()');
+    //elem.webkitCancelFullScreen();
+    LOG('call document.webkitCancelFullScreen()');
+    document.webkitCancelFullScreen();
+  }
+};
+
 window.onload = function() {
   init();
   $('e-button').onclick = function(e) {
     goFullscreen();
+  };
+  $('e-cancel-button').onclick = function(e) {
+    exitFullscreen();
   };
   LOG('registered click');
 };
