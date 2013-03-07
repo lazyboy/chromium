@@ -68,8 +68,8 @@ window.onload = function() {
       LOG('permission: ' + e.permission);
       e.request.allow();
       // Now make the embedder itself go fullscreen.
-      window.console.log('make embedder fullscreen too');
-      goFullscreen();
+      window.console.log('make embedder\'s webview fullscreen too');
+      goFullscreen(webview);
     });
   }
 };
