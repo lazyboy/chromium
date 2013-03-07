@@ -36,8 +36,8 @@ var goFullscreen = function(opt_elem) { LOG('Embedder go fullscreen');
   }
 };
 
-var exitFullscreen = function() {
-  var elem = document.getElementById('efullscreen');
+var exitFullscreen = function(opt_elem) {
+  var elem = opt_elem || document.documentElement;
   if (elem) {
     //LOG('call elem.webkitCancelFullScreen()');
     //elem.webkitCancelFullScreen();
@@ -50,11 +50,17 @@ window.onload = function() {
   init();
   $('e-button').onclick = function(e) {
     var elem = document.getElementById('efullscreen');
+    goFullscreen(elem);
     //goFullscreen(elem);
-    goFullscreen();
+  };
+  $('w-button').onclick = function(e) {
+    var elem = document.querySelector('webview');
+    elem.style.width = '100%';
+    elem.style.height = '100%';
+    goFullscreen(elem);
   };
   $('e-cancel-button').onclick = function(e) {
-    exitFullscreen();
+    exitFullscreen($('efullscreen'));
   };
   LOG('registered click');
 
@@ -66,10 +72,13 @@ window.onload = function() {
     webview.addEventListener('permissionrequest', function(e) {
       LOG('permissionrequest');
       LOG('permission: ' + e.permission);
-      e.request.allow();
       // Now make the embedder itself go fullscreen.
-      window.console.log('make embedder\'s webview fullscreen too');
-      goFullscreen(webview);
+//      window.console.log('first, exit fullscreen');
+//      exitFullscreen();
+//      window.console.log('make embedder\'s webview fullscreen too');
+//      goFullscreen(webview);
+
+      e.request.allow();
     });
   }
 };
