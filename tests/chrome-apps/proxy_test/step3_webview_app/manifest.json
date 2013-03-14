@@ -1,0 +1,16 @@
+{
+  "name": "STEP3:APP+WEBVIEW+IMG",
+  "version": "1",
+  "manifest_version": 2,
+  "description": "run it after running server app.",
+  "app": {
+    "background": {
+      "scripts": ["main.js"]
+    }
+  },
+  "permissions": [
+    "experimental",
+    "webview",
+    {"socket":["tcp-connect", "tcp-listen"]}
+  ]
+}

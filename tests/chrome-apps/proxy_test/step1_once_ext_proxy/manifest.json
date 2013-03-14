@@ -1,0 +1,24 @@
+{
+  "name": "STEP1: Set proxy extension",
+  "version": "0.1",
+  "description": "STEP1: Set proxy extension",
+  "browser_action": {
+    "default_icon": "icon16.png",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "icon16.png",
+    "32": "icon16.png",
+    "48": "icon16.png",
+    "128": "icon16.png"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "permissions": [
+    "proxy"
+  ],
+  "manifest_version": 2
+}

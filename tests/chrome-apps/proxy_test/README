@@ -1,0 +1,3 @@
+1: (once only), install step1_* extension, will set .foobar.com proxy to localhost:1235
+2: run step2_* app, choose a dir that has a file called youtube.png (use step1_* as dir), start server.
+3. run step3_* app, this will have a webview that requests GET to www.foobar.com/youtube.png.
