@@ -1,0 +1,15 @@
+{
+  "manifest_version": 2,
+  "name": "embedder idb Storage",
+  "version": "1",
+  "minimum_chrome_version": "23",
+  "permissions": [
+    "webview",
+    "storage"
+  ],
+  "app": {
+    "background": {
+      "scripts": ["test.js"]
+    }
+  }
+}
