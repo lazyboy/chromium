@@ -1,10 +1,11 @@
 <!--
- * Copyright (c) 2012 The Chromium Authors. All rights reserved.  Use of this
+ * Copyright 2013 The Chromium Authors. All rights reserved.  Use of this
  * source code is governed by a BSD-style license that can be found in the
  * LICENSE file.
 -->
 <html>
 <head>
+  <script type="text/javascript" src="main.js"></script>
 </head>
 <body>
 <!--
@@ -14,7 +15,11 @@
 <script src="main.js"></script>
 -->
 <div>Embedder (partitioned guest)</div>
-<webview partition="persist:idb" src="http://osmium.wat.corp.google.com/a/idb/page.html" style="border: 1px solid gray; height: 240px; width: 90%"></webview>
+<button id="button-clear">Clear guest storage</button>
+<!-- FIX ME -->
+<!-- FIX ME -->
+<!-- FIX ME -->
+<webview partition="persist:idb" src="guest/page.html" style="border: 1px solid gray; height: 240px; width: 90%"></webview>
 <!--
 <webview src="http://www.google.com" style="border: 1px solid gray; height: 240px; width: 90%"></webview>
 -->
