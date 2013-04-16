@@ -1,0 +1,32 @@
+<html>
+<head>
+  <title>datalist test</title>
+</head>
+<body>
+<input type="text" list="autocomplete-items" id="itext" />
+<datalist id="autocomplete-items">
+  <option value="Abacus"></option>
+  <option value="Another foobar"></option>
+  <option value="Batman"></option>
+  <option value="Astronomy"></option>
+  <option value="Again"></option>
+</datalist>
+
+<div id="logDiv"></div>
+
+  <script>
+var $ = function(id) { return document.getElementById(id); };
+var LOG = function(msg) { var div = $('logDiv'); if (div) div.innerText += msg + '\n'; };
+var test = function() {
+  LOG('test');
+  $('itext').addEventListener('change', function(e) {
+    LOG('change');
+  });
+  $('itext').addEventListener('input', function(e) {
+    LOG('input');
+  });
+};
+test();
+  </script>
+</body>
+</html>
