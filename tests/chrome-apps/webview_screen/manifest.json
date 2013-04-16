@@ -1,6 +1,6 @@
 {
   "manifest_version": 2,
-  "name": "window.screen"
+  "name": "window.screen",
   "version": "1",
   "minimum_chrome_version": "23",
   "permissions": [
