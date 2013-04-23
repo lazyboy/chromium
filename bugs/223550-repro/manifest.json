@@ -1,0 +1,20 @@
+{
+   "name": "Bug Extension",
+	"manifest_version": 2,
+   	"version": "1.0",
+   	"description": "Bug",
+	
+	"browser_action": {
+		"default_popup": "popup.html"
+	},
+	
+	"permissions": [
+		"tabs", 
+		"background"
+	],
+	
+	"background": {
+		"scripts": ["background.js"],
+		"persistent": false
+	}
+}
