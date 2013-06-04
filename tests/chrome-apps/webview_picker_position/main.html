@@ -1,0 +1,47 @@
+<!--
+ * Copyright 2013 The Chromium Authors. All rights reserved.  Use of this
+ * source code is governed by a BSD-style license that can be found in the
+ * LICENSE file.
+-->
+<html>
+<head>
+<script type="text/javascript" src="main.js"></script>
+<style type="text/css">
+.rot1 {
+/*  -webkit-transform: translate(200px, 0) rotate(45deg); */
+/*  -webkit-transform: translate(300px, 0); */
+  -webkit-transform: rotate(180deg);
+  background-color: green;
+}
+</style>
+</head>
+<body>
+  <div style="border: 1px solid gray; min-height: 120px;">
+    <div>Embedder</div>
+    <div><input type="color"><input type="datetime-local"></div>
+    <div><button id="move-button">Move</button></div>
+  </div>
+<div style="border: 1px solid black;" class="rot1">
+  <webview src="http://jsbin.com/ufitir/2/" style="width: 90%;"></webview>
+</div>
+<!-- datetime-local -->
+<!--
+<webview src="http://www.w3schools.com/html/tryit.asp?filename=tryhtml5_input_type_datetime-local" style="width: 90%;"></webview>
+-->
+<!-- datetime -->
+<!--
+<webview src="http://www.w3schools.com/html/tryit.asp?filename=tryhtml5_input_type_datetime" style="width: 90%"></webview>
+-->
+<!-- color -->
+<!--
+<webview src="http://www.w3schools.com/html/tryit.asp?filename=tryhtml5_input_type_color" style="width: 90%"></webview>
+-->
+<!-- all -->
+<!--
+<webview src="http://demo.agektmr.com/datalist/" style="width: 90%; min-height: 600px;"></webview>
+-->
+<!--
+<webview src="http://davidwalsh.name/demo/datalist.php" style="width: 90%"></webview>
+-->
+</body>
+</html>
