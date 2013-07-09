@@ -1,0 +1,40 @@
+<!--
+ * Copyright 2013 The Chromium Authors. All rights reserved.  Use of this
+ * source code is governed by a BSD-style license that can be found in the
+ * LICENSE file.
+-->
+<html>
+<head>
+  <script type="text/javascript" src="main.js"></script>
+</head>
+<body>
+  <div>
+    <div>Embedder</div>
+
+  <!--
+  <div style="display: inline-block">
+    <div>Guest 0 does geo request from top level and iframe</div>
+    <webview id="webview0" src="http://jsbin.com/egekod/6" style="border: 1px solid gray; height: 320px;"></webview>
+  </div>
+  -->
+
+  <div style="display: inline-block">
+    <div>Guest</div>
+    <webview id="webview1" src="http://jsbin.com/egekod/1" style="border: 1px solid gray; height: 320px;"></webview>
+  </div>
+  <!--
+  <div style="display: inline-block">
+    <div>Guest 2 has iframe in it</div>
+    <webview id="webview2" src="http://jsbin.com/egekod/1" style="border: 1px solid gray; height: 320px;"></webview>
+  </div>
+  <div style="display: inline-block">
+    <div>Guest 3 has geo request in both top level and iframe</div>
+    <webview id="webview3" src="http://jsbin.com/egekod/2" style="border: 1px solid gray; height: 320px;"></webview>
+  </div>
+  <div style="display: inline-block">
+    <div>Guest 4 does geo request simultaneously in both top level and iframe</div>
+    <webview id="webview4" src="http://jsbin.com/omiriw/1" style="border: 1px solid gray; height: 320px;"></webview>
+  </div>
+  -->
+</body>
+</html>
