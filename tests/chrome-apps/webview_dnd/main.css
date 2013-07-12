@@ -1,0 +1,25 @@
+body {
+}
+
+.dragBox {
+  width: 128px;
+  height: 128px;
+  display: inline-block;
+}
+
+.dragMe {
+  -webkit-user-drag: element;
+  -webkit-user-select: none;
+}
+
+.src {
+  background-color: red;
+}
+
+.dst {
+  background-color: blue;
+}
+
+.embedder-border {
+  border: 1px solid black;
+}
