@@ -1,0 +1,14 @@
+{
+  "manifest_version": 2,
+  "name": "<webview>.userAgent; +webRequest API to check resource load's User-Agent',
+  "version": "1",
+  "minimum_chrome_version": "27",
+  "permissions": [
+    "webview"
+  ],
+  "app": {
+    "background": {
+      "scripts": ["test.js"]
+    }
+  }
+}

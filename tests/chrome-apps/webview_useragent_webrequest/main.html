@@ -1,0 +1,29 @@
+<!--
+ * Copyright 2013 The Chromium Authors. All rights reserved.  Use of this
+ * source code is governed by a BSD-style license that can be found in the
+ * LICENSE file.
+-->
+<html>
+<head>
+<script type="text/javascript" src="main.js"></script>
+</head>
+<body>
+  <div>
+    <div>Embedder</div>
+    <div>
+      <button id="button-id">Click for user agent</button>
+      <div id="status-div">User agent:</div>
+    </div>
+  </div>
+  <div>
+    <div>Guest</div>
+    <div>
+    <!--
+      <webview id="first" src="http://jsbin.com/UPiS/1/" useragent="foobar-useragent" style="border: 1px solid gray; height: 120px;" style="width: 90%; min-height: 200px;"></webview>
+    -->
+      <webview id="first" style="border: 1px solid gray; height: 120px;" style="width: 90%; min-height: 200px;"></webview>
+      <webview src="http://www.whatsmyuseragent.com/" style="border: 1px solid gray; height: 120px;" style="width: 90%; min-height: 200px;"></webview>
+    </div>
+  </div>
+</body>
+</html>
