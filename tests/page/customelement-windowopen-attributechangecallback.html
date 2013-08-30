@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>document.register Demo - 2013Q2 Blink All Hands</title>
+  <style type="text/css">
+  x-webview {
+    display: inline-block;
+  }
+  </style>
+</head>
+<body>
+  <div>
+    <button id="create-custom-element">Create &lt;custom element&gt;</button>
+    <button id="create-newwindow">Create &lt;window&gt;</button>
+  </div>
+<script>
+//alert('Best viewed with "view source" and the devtools console.');
+
+if (!('register' in document)) {
+  alert('Looks like you need a more bleeding-edge Chrome for this demo.');
+}
+
+var $ = function(id) { return document.getElementById(id); };
+var LOG = function(msg) { window.console.log(msg); };
+
+var proto1 = Object.create(HTMLElement.prototype);
+proto1.createdCallback = function() {
+  LOG('proto1.createdCallback');
+  //this.innerHTML = 'custom inner html';
+  var b = document.createElement('button');
+  b.innerHTML = 'button';
+  var self = this;
+  this.appendChild(b);
+
+  var changeAttributeButton = document.createElement('button');
+  changeAttributeButton.innerHTML = 'Change attribute';
+  this.appendChild(changeAttributeButton);
+
+  this.logDiv_ = document.createElement('div');
+  this.appendChild(this.logDiv_);
+
+  b.onclick = function() { self.logDiv_.innerHTML += '<div>click</div>'; alert('alert'); };
+  changeAttributeButton.onclick = function(e) {
+    self.setAttribute('foo' + (+new Date), 'myvalue');
+  };
+};
+
+proto1.attributeChangedCallback = function(name, oldValue, newValue) {
+  this.logDiv_.innerHTML += '<div>attributeChangedCallback, ' + name + '</div>';
+};
+document.register('x-foo', {prototype: proto1});
+
+var onCreateWebViewClick = function() {
+  LOG('onCreateWebViewClick');
+  var fooElement = document.createElement('x-foo');
+  document.body.appendChild(fooElement);
+};
+
+var onOpenNewWindow = function() {
+  var fooElement = document.createElement('x-foo');
+  var w = window.open('about:blank');
+  w.document.body.appendChild(fooElement);
+};
+
+var el = $('create-custom-element');
+el.onclick = onCreateWebViewClick;
+var elNW = $('create-newwindow');
+elNW.onclick = onOpenNewWindow;
+</script>
+<div>
+  <div>
+  Click on "Create custom element" button to create a custom element. The custom element has two buttons, one is a click handler and the other triggers attribute change on the element. Both handlers emit logs inside the custom element.
+  </div>
+  <div>
+  Click on "Create new window" to window.open and transfer a custom element to that new page. While this page is open, Clicking Attribute change button on the new page triggers attributeChangedCallback(); but stops triggering that callback when you close this window.
+  </div>
+</div>
+</body>
+</html>
