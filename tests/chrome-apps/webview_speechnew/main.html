@@ -1,0 +1,22 @@
+<!--
+ * Copyright 2013 The Chromium Authors. All rights reserved.  Use of this
+ * source code is governed by a BSD-style license that can be found in the
+ * LICENSE file.
+-->
+<html>
+<head>
+<script type="text/javascript" src="main.js"></script>
+</head>
+<body>
+  <div>Embedder</div>
+  <input type=text name=spoken-input placeholder="say what you'd like or type it in" size=50 speech x-webkit-speech id="sid">
+  <button id="check-emb-api">Check embedder API</button>
+  <div>
+    <webview src="http://jsbin.com/ivAtexa/1/"
+        style="width: 100%; height: 100px;" id="jsbinwv"></webview>
+  </div>
+  <div style="border: 2px solid green;">
+    <webview src="https://www.google.com/intl/en/chrome/demos/speech.html" style="width: 800px; height: 300px;"></webview>
+  </div>
+</body>
+</html>
