@@ -1,0 +1,15 @@
+{
+  "manifest_version": 2,
+  "name": "<webview>.UA+JS",
+  "description": "checking user-agent header by overriding it using javascript: url",
+  "version": "1",
+  "minimum_chrome_version": "27",
+  "permissions": [
+    "webview"
+  ],
+  "app": {
+    "background": {
+      "scripts": ["test.js"]
+    }
+  }
+}

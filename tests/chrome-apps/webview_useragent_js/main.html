@@ -1,0 +1,32 @@
+<!--
+ * Copyright 2013 The Chromium Authors. All rights reserved.  Use of this
+ * source code is governed by a BSD-style license that can be found in the
+ * LICENSE file.
+-->
+<html>
+<head>
+<script type="text/javascript" src="main.js"></script>
+</head>
+<body>
+  <div>
+    <div>Embedder</div>
+    <div>
+      <button id="button-id">Click for user agent</button>
+      <div id="status-div">User agent:</div>
+    </div>
+  </div>
+  <div>
+    <div>Guest</div>
+    <div>
+      <div style="float: left; width: 300px;">
+        <span>[first] This &lt;webview&gt; uses setUserAgentOverride API, not available on chromium builds yet</span>
+        <webview id="first" style="border: 1px solid gray; height: 200px;"></webview>
+      </div>
+      <div style="float: left; width: 300px;">
+        <span>[second] This &lt;webview&gt; uses bookmarklet to run javascript: code (again needs manual tweaking to run JavaScript in webview</span>
+        <webview id="second" style="border 1px solid gray; height: 200px"></webview>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
