@@ -5,12 +5,19 @@
 -->
 <html>
 <head>
+  <title>Embedder title</title>
 </head>
 <body>
-<div>Embedder</div>
-    <a href="http://www.google.com" title="Embedder Tooltip!">Google link</a>
-    <webview title="weview-element-tooltip"
-        src='data:text/html,<html><body><a href="http://www.google.com" title="Guest Tooltip!">Google link</a></body></html>'
-        style="border: 1px solid gray"/>
+  <div>Embedder</div>
+  <div>
+    <div>
+      <a href="http://www.google.com" title="Embedder Tooltip!">Google link</a>
+    </div>
+    <div id="webview-container" title="webview-container-tooltip">
+      <webview title="weview-element-tooltip"
+          src='data:text/html,<html><head><title>Guest title</title></head><body><a href="http://www.google.com" title="Guest Tooltip!">Google link</a></body></html>'
+          style="border: 1px solid gray"/>
+    </div>
+  </div>
 </body>
 </html>

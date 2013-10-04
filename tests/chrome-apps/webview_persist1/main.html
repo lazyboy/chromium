@@ -10,12 +10,23 @@
 </head>
 <body>
 <div style="border: 1px solid">
-  <div>Embedder <button id="clear-button">Clear guest's stuff</button></div>
+  <div>Embedder <input id="remove_mask" type="text" value="1"/><button id="clear-button">Clear guest's stuff</button><button id="clear-button2">Clear second guest's stuff</button></div>
   <div><button id="show-emb">Show embedder's cookies</button><button id="add-emb">Add a cookie</button><button id="rem-emb">Remove a cookie</button></div>
 </div>
 <!--
 <webview src="http://jsbin.com/epipoy/1" style="width: 90%; height: 90%;" partition="persist: 123"></webview>
 -->
-<webview src="http://jsbin.com/onasox/1" style="width: 90%; height: 90%;" partition="persist: 123"></webview>
+
+<div style="position: relative; display: inline-block; width: 45%; border: 1px solid green;">
+<!--
+<webview src="http://jsbin.com/onasox/3" style="width: 90%; height: 90%;" partition="persist: 123"></webview>
+-->
+<webview src="http://jsbin.com/oBAk/1" style="width: 90%; height: 90%;" partition="persist: 123"></webview>
+</div>
+
+<div style="position: relative; display: inline-block; width: 45%; border: 1px solid green;">
+<webview src="http://jsbin.com/onasox/3" id="second" style="width: 90%; height: 90%;"></webview>
+</div>
+
 </body>
 </html>

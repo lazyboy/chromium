@@ -1,1 +1,1 @@
-window.console.log('************ content_foo.js loaded');
+//window.console.log('********************* one two three ****************');

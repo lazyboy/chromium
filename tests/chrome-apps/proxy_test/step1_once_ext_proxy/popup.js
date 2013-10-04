@@ -2,6 +2,9 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+var LOG = function(msg) { window.console.log(msg); };
+var $ = function(id) { return document.getElementById(id); };
+
 // Modified from chrome-apps-sample.
 document.addEventListener('DOMContentLoaded', function () {
   LOG('popup.js DOMContentLoaded');

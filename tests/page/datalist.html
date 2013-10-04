@@ -3,13 +3,24 @@
   <title>datalist test</title>
 </head>
 <body>
-<input type="text" list="autocomplete-items" id="itext" />
+<input type="text" list="autocomplete-items" id="itext2" />
+<input type="text" id="itext" />
 <datalist id="autocomplete-items">
   <option value="Abacus"></option>
   <option value="Another foobar"></option>
   <option value="Batman"></option>
   <option value="Astronomy"></option>
   <option value="Again"></option>
+</datalist>
+<button id="force-button">With user gesture</button>
+
+<input type="text" list="tmp-ac" id="tmp-id" />
+<datalist id="tmp-ac">
+  <option value="XAbacus"></option>
+  <option value="YAnother foobar"></option>
+  <option value="ZBatman"></option>
+  <option value="WAstronomy"></option>
+  <option value="VAgain"></option>
 </datalist>
 
 <div id="logDiv"></div>
@@ -22,11 +33,54 @@ var test = function() {
   $('itext').addEventListener('change', function(e) {
     LOG('change');
   });
-  $('itext').addEventListener('input', function(e) {
+  $('itext2').addEventListener('input', function(e) {
     LOG('input');
+    window.console.log('input: ' + e);
+    for (var k in e) { LOG(k + ': ' + e[k]); }
   });
 };
 test();
+var test2 = function() {
+  $('itext').focus();
+  LOG('start dispatch');
+  var e = document.createEvent('KeyboardEvent');
+  e.initKeyboardEvent('keydown',
+      true,  // canBubble
+      true,  // cancelable
+      window,
+      'U+0043', // C
+      0,  // keyLocation
+      false,  // ctrl
+      false,  // alt
+      false,  // shift
+      false);  // meta
+  // Does not work.
+  $('itext').dispatchEvent(e);
+  LOG('dispatched');
+};
+test2();
+
+var test3 = function() {
+  var e = document.createEvent('KeyboardEvent');
+  e.initKeyboardEvent('keydown', true, true, document.defaultView, 'Down', // keyName
+      0, false, true // altKey
+      );
+  $('itext').dispatchEvent(e);
+  LOG('dispatched 3');
+};
+window.setTimeout(test3, 1000);
+
+var test4 = function() {
+  var e = document.createEvent('KeyboardEvent');
+  e.initKeyEvent('keypress', true, true, null, false, false, false, false, 8, 0);
+  $('itext').dispatchEvent(e);
+  LOG('dispatched 4');
+};
+document.getElementById('force-button').onclick = function(e) { test4(); };
+
+document.onclick = function(e) {
+  LOG('document.onclick');
+};
   </script>
 </body>
 </html>

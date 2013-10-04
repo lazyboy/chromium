@@ -144,6 +144,10 @@ onload = function() {
       mapKey = 'http://www.foobar.com' + origMapKey;
       filesMap[mapKey] = files[i];
     }
+    if (files.length > 0) {
+      window.console.log('force map done');
+      filesMap['http://www.google.ca/intl/en_ALL/images/logos/images_logo_lg.gif'] = files[0];
+    }
 
     start.disabled = false;
     stop.disabled = true;
