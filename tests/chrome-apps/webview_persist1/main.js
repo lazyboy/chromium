@@ -5,17 +5,29 @@ var LOG = function(msg) {
   window.console.log(msg);
 };
 
-var clearButton = function(e) {
+var clearWebView = function(webview) {
   LOG('clearButton');
-  var webview = document.querySelector('webview');
+  //var webview = document.querySelector('webview');
   if (!webview) {
     LOG('<webview> not found');
     return;
   }
+  var removeMask = $('remove_mask').value;
   LOG('BEG clearStorage');
-  webview.clearStorage();
+  LOG('removeMask: ' + removeMask);
+//  webview.clearStorage(removeMask);
+  
+  webview.clearData({'since': 1234}, {
+'cookies': true,
+'localStorage': true
+}, function() { window.console.log('DONE'); });
+
   LOG('END clearStorage');
 };
+
+var clearButton = function(e) { clearWebView(document.querySelector('webview')); };
+var clearButton2 = function(e) { clearWebView($('second')); };
+
 
 var c = goog.net.cookies;
 var curAdd = 1;
@@ -45,6 +57,7 @@ var removeAnEmbedderCookie = function() {
 window.onload = function() {
   LOG('window.onload');
   $('clear-button').onclick = clearButton;
+  $('clear-button2').onclick = clearButton2;
   $('show-emb').onclick = showEmbedderCookies;
   $('add-emb').onclick = addAnEmbedderCookie;
   $('rem-emb').onclick = removeAnEmbedderCookie;

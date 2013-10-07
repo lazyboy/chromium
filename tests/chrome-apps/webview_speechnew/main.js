@@ -22,6 +22,10 @@ var addGuest = function() {
   el.addEventListener('consolemessage', function(e) {
     LOG('[ from GUEST]: ' + e.message);
   });
+  el.addEventListener('permissionrequest', function(e) {
+    LOG('ebmedder.permissionrequest, permission: ' + e.permission);
+    e.request.allow();
+  });
 
   el.setAttribute('src', guestSrc);
 };

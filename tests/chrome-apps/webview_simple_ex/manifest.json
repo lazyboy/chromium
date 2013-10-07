@@ -1,8 +1,8 @@
 {
   "manifest_version": 2,
-  "name": "<webview> src/setAttribute check",
+  "name": "Simple <webview> with executeScript",
   "version": "1",
-  "minimum_chrome_version": "23",
+  "minimum_chrome_version": "30",
   "permissions": [
     "webview"
   ],
