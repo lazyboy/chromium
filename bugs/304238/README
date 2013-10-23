@@ -1,1 +1,9 @@
-Check malformed tag stuff for <webview>.
+Regression test for <webview> dialog.
+In current stable/beta, brining up window.confirm dialog hangs guest.
+r228920 fixes this.
+
+Click inside the guest "click to open dialog", if you can click and keep
+selecting and changing selection of this text, then the bug is fixed.
+
+If the regression is present, you'd see the guest go stale, getting into
+a state where you cannot select/change selection of the text.

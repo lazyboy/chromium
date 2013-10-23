@@ -8,7 +8,9 @@
 </head>
 <body>
 <div>Embedder</div>
-  <webview src="data:text/html,<div onclick=javascript:window.confirm()>click to open dialog</div>" style="width: 300px; height: 100px;"></webview>
+<div style="border: 1px solid gray">
+  <webview src="data:text/html,<div onclick=javascript:window.confirm()>click to trigger dialog</div>" style="width: 300px; height: 100px;"></webview>
+</div>
   <script src="main.js"></script>
   <div id="logs">logs</div>
 </body>
