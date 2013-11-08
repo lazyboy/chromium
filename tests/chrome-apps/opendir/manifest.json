@@ -1,0 +1,14 @@
+{
+  "manifest_version": 2,
+  "name": "opendir",
+  "version": "1",
+  "minimum_chrome_version": "31",
+  "permissions": [
+    {"fileSystem": ["write", "directory"]}
+  ],
+  "app": {
+    "background": {
+      "scripts": ["test.js"]
+    }
+  }
+}
