@@ -11,7 +11,7 @@ var openDirHandler = function(e) {
   chrome.fileSystem.chooseEntry({
     'type': 'openDirectory'
   }, function(entry, fileEntries) {
-    LOG('openDirHandler callback');
+    LOG('callback');
 
     LOG('entry: ' + entry);
     for (var key in entry) {
@@ -27,6 +27,18 @@ var openDirHandler = function(e) {
         if (entry.isDirectory) { LOG('dir: ' + entry.fullPath); }
         else if (entry.isFile) { LOG('file: ' + entry.fullPath); }
         else { LOG('unkw: ' + entry.fullPath); }
+
+        if (entry.isFile) {
+          // path.
+          chrome.fileSystem.getDisplayPath(entry, function(text) {
+            window.console.log('**** 2. finally ****');
+            window.console.log('path: ' + text);
+          });
+          // size.
+          entry.file(function(f) {
+            window.console.log('f.size: ' + f.size);
+          });
+        }
       }
     });
   });
