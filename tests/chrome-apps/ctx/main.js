@@ -6,11 +6,15 @@ var $ = function(id) {
 };
 
 var getWebViewSrc = function() {
-return "data:text/html,<body bgcolor=red>this is <a href='http://www.google.com'>Google link</a>guest</body>";
+  return "data:text/html,<body bgcolor=red>this is <a href='http://www.google.com'>Google link</a>guest</body>";
 };
 
 var getWebViewSrc2 = function() {
-return "data:text/html,<body bgcolor=blue>this is <a href='http://www.google.com'>Google link</a>guest</body>";
+  return "data:text/html,<body bgcolor=blue>this is <a href='http://www.google.com'>Google link</a>guest</body>";
+};
+
+var getWebViewSrc3 = function() {
+  return "data:text/html,<body bgcolor=yellow>this is <a href='http://www.google.com'>Google link</a>guest</body>";
 };
 
 window.onload = function() {
@@ -34,4 +38,11 @@ window.onload = function() {
   w2.id = 'webview2';
   w2.src = getWebViewSrc2();
   document.body.appendChild(w2);
+
+  var w3 = document.createElement('webview');
+  w3.id = 'webview3';
+  w3.src = getWebViewSrc3();
+  document.body.appendChild(w3);
+
+  w3.contextMenus.create({'title': 'fooooooo'}, function() { LOG('fooooooo.created'); });
 };
