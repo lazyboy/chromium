@@ -1,0 +1,20 @@
+body {
+  background-color: green;
+}
+
+.dragBox {
+  width: 64px;
+  height: 64px;
+}
+
+.dragSrc {
+  background-color: blue;
+}
+
+.dragDest {
+  background-color: gray;
+}
+
+.dragElement {
+  -webkit-user-select: none;
+}
