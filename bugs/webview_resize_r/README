@@ -1,0 +1,2 @@
+<webview> autosize bug repro.
+This app constantly changes maxheight attribute of a <webview> from Javascript. Eventually crashes the renderer.
