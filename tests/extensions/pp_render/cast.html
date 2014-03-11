@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<!-- saved from url=(0084)chrome-extension://boadgeojelhgndaghljhdicfkmllpafd/popup_menu.html#/receiver_picker -->
+<!--
+<html ng-app="popupMenu" ng-csp="" xmlns="http://www.w3.org/1999/xhtml" class="ng-scope"><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+-->
+<html>
+<title>Chromecast Extension Popup</title>
+<link rel="stylesheet" type="text/css" href="chrome-extension://boadgeojelhgndaghljhdicfkmllpafd/popup_menu_css.css">
+<link href="./css1.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="chrome-extension://boadgeojelhgndaghljhdicfkmllpafd/angular.js"></script><style type="text/css">@charset "UTF-8";
+
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak],
+.ng-cloak, .x-ng-cloak,
+.ng-hide {
+  display: none !important;
+}
+
+ng\:form {
+  display: block;
+}
+</style>
+<script type="text/javascript" src="chrome-extension://boadgeojelhgndaghljhdicfkmllpafd/angular_sanitize.js"></script>
+<script type="text/javascript" src="chrome-extension://boadgeojelhgndaghljhdicfkmllpafd/angular_route.js"></script>
+<script type="text/javascript" src="chrome-extension://boadgeojelhgndaghljhdicfkmllpafd/popup_menu_script.js"></script>
+</head>
+<body id="popup" ng-controller="PopupMenuCtrl" class="ng-scope">
+  <!-- ngView:  --><div ng-view="" class="ng-scope"><div class="ng-scope">
+  <div class="transparent-overlay ng-hide" ng-show="sharedState.selectingCaptureSurface" ng-click="sharedState.selectingCaptureSurface = false"></div>
+  <div class="no-device-header" ng-hide="receiverActs.length &gt; 0 || init">
+    <div>
+      <amr>No Cast devices found.</amr>
+      <span class="learn-more-link" ng-click="onClickDeviceMissing()">
+        <amr>(Device missing?)</amr>
+      </span>
+    </div>
+  </div>
+  <div class="device-selection-header ng-binding ng-hide" ng-show="receiverActs.length &gt; 0">
+    Cast this tab to...
+    <div class="beta-label"></div>
+    <div ng-class="{&#39;drop-down&#39;:true, &#39;menu-button&#39;:true, showing:sharedState.selectingCaptureSurface}" ng-click="sharedState.selectingCaptureSurface = !sharedState.selectingCaptureSurface" class="drop-down menu-button">
+    </div>
+  </div>
+
+  <!-- ngIf: isV1AppInTab && receiverActs.length > 0 -->
+
+  <div style="-webkit-user-select: none;">
+    <div class="device-selector" role="menu" aria-haspopup="true" aria-activedescendant="">
+      <!-- ngRepeat: receiverAct in receiverActs -->
+      </div>
+      <div class="goog-menuseparator" role="separator"></div>
+      <div class="goog-menuitem" role="menuitem" ng-click="showOptions()">
+        <div class="goog-menuitem-content">
+          <amr>Options</amr>
+        </div>
+      </div>
+      <div class="goog-menuitem" role="menuitem" ng-click="sendFeedback()">
+        <div class="goog-menuitem-content">
+          <amr>Send feedback...</amr>
+        </div>
+      </div>
+      <div class="goog-menuitem last-menuitem" role="menuitem" ng-click="showHelp()">
+        <div class="goog-menuitem-content">
+          <amr>Help</amr>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="capture-surface-selection ng-scope ng-hide" ng-show="sharedState.selectingCaptureSurface">
+    <div ng-class="{&#39;checkable-option&#39;:true, checked:settings.captureSurface == &#39;tab&#39;}" ng-click="settings.captureSurface = &#39;tab&#39;; updateSettings(); sharedState.selectingCaptureSurface = false" class="checkable-option checked">
+      <amr>Cast current tab</amr>
+    </div>
+    <div ng-class="{&#39;checkable-option&#39;:true, checked:settings.captureSurface == &#39;desktop&#39;}" ng-click="settings.captureSurface = &#39;desktop&#39;; updateSettings(); sharedState.selectingCaptureSurface = false" ng-hide="disableProjectScreen" class="checkable-option">
+      <amr>Cast entire screen</amr>
+      <amr>(experimental)</amr>
+    </div>
+    <div class="goog-menuseparator" role="separator"></div>
+    <div ng-class="{&#39;checkable-option&#39;:true, checked:settings.lowFpsMode == true, &#39;disabled-option&#39;:settings.captureSurface == &#39;desktop&#39;}" ng-click="toggleAudioIfTab();" class="checkable-option">
+      <amr>Audio mode</amr>
+    </div>
+  </div>
+
+</div>
+
+
+</body></html>
