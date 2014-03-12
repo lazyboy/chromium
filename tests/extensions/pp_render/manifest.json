@@ -1,0 +1,13 @@
+{
+  "name": "Simple ext popup render check",
+  "version": "1.0",
+  "permissions": [
+    "tabs", "http://*/*", "https://*/*"
+  ],
+  "browser_action": {
+      "default_title": "FOO",
+      "default_icon": "icon.png",
+      "default_popup": "cast.html"
+  },
+  "manifest_version": 2
+}
