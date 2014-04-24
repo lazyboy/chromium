@@ -1,5 +1,5 @@
 var LOG = function(msg) {
-  window.console.log(msg);
+  //window.console.log(msg);
 };
 
 var container;
