@@ -9,7 +9,8 @@ var $ = function(id) {
 };
 
 var getWebViewSrc = function() {
-  return "data:text/html,<body bgcolor=blue>this is <a href='http://www.google.com'>Google link</a>guest <input type=\"text\" value=\"my value\"/></body>";
+  return "http://jsbin.com/bisen/1/";
+  //return "data:text/html,<body bgcolor=blue>this is <a href='http://www.google.com'>Google link</a>guest <input type=\"text\" value=\"my value\"/></body>";
 };
 
 var showLogInDiv = function(msg) {
@@ -26,10 +27,10 @@ window.onload = function() {
     LOG('webview1.loadstop');
   });
 
-  w.addEventListener('systemContextMenu', function(e) {
-    LOG('**** systemContextMenu ****');
-    LOG('**** systemContextMenu ****');
-    LOG('**** systemContextMenu ****');
+  w.addEventListener('contextmenu', function(e) {
+    LOG('**** contextmenu ****');
+    LOG('**** contextmenu ****');
+    LOG('**** contextmenu ****');
     LOG('* e.items: ' + e.items);
     var len = e.items.length;
     var itemIdsToShow = [];
@@ -50,6 +51,7 @@ window.onload = function() {
       //itemIdsToShow.push(e.items[i]);
     }
 
+    //e.menu.show();
     e.preventDefault();
     window.setTimeout(function() {
       LOG('setTimeout fire to show, calling allow()');
@@ -69,8 +71,7 @@ window.onload = function() {
         }
       }
 
-      //e.request.allow(itemIdsToShow);
-      e.request.allow(outItems);
+      e.menu.show(outItems);
       LOG('done calling allow()');
     //}, 3000);
     }, 30);
