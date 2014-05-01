@@ -36,18 +36,18 @@ window.onload = function() {
     var itemIdsToShow = [];
     for (var i = 0; i < len; ++i) {
       LOG('item ' + i);
-      LOG('command_id: ' + e.items[i].command_id);
-      LOG('title: ' + e.items[i].title);
+      LOG('commandId: ' + e.items[i].commandId);
+      LOG('label: ' + e.items[i].label);
       if (len > 1 && i == 1) {
         continue;
       }
 
-      var itemToShow = {'command_id': e.items[i].command_id};
-      if (i%2) itemToShow.title = 'Foobar ' + i;
+      var itemToShow = {'commandId': e.items[i].commandId};
+      if (i%2) itemToShow.label = 'Foobar ' + i;
       itemIdsToShow.push(itemToShow);
 
-      //itemIdsToShow.push(e.items[i].command_id);
-      //itemIdsToShow.push({'command_id': e.items[i].command_id, 'title': 'Foobar' + i});
+      //itemIdsToShow.push(e.items[i].commandId);
+      //itemIdsToShow.push({'commandId': e.items[i].command_Id, 'label': 'Foobar' + i});
       //itemIdsToShow.push(e.items[i]);
     }
 
@@ -66,8 +66,8 @@ window.onload = function() {
       for (i = 0; i < itemIdsToShow.length; ++i) {
         var item = itemIdsToShow[i];
         outItems.push(item);
-        if (item.command_id != -1 && i != itemIdsToShow.length - 1 && itemIdsToShow[i + 1].command_id != -1) {
-          outItems.push({command_id: -1});  // Separator.
+        if (item.commandId != -1 && i != itemIdsToShow.length - 1 && itemIdsToShow[i + 1].commandId != -1) {
+          outItems.push({commandId: -1});  // Separator.
         }
       }
 
