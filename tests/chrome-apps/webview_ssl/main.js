@@ -5,5 +5,5 @@ var addWebview = function(src) {
 };
 
 window.onload = function() {
-  addWebview('https://www.foobar.com');
+  addWebview('https://foobar.com');
 };
