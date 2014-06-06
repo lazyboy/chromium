@@ -1,3 +1,6 @@
+// ==UserScript==
+// @match https://chromiumcodereview.appspot.com/*
+// ==/UserScript==
 var LOG = function(var_args) {
   window.console.log.apply(window.console, arguments);
 };
