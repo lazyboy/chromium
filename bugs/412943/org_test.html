@@ -28,7 +28,7 @@
 
     <script type="text/javascript">
         window.onload = function() {
-          document.querySelector('.message_container').innerHTML +=
+          document.querySelector('.animatable_wrapper').innerHTML +=
               '' + new Date() + '<br/>';
           move();
         }
@@ -38,7 +38,6 @@
           el.style.transition = '';
           el.style.transform = 'translate(-500px, 0)';
           setTimeout(function() {
-            //el.style.animationDuration = '2000ms';
             el.style.transition = 'ease-out 2s';
             el.style.transform = 'translate(0, 0)';
           }, 0)
@@ -47,10 +46,10 @@
     </script>
   </head>
   <body id="player" style="font-size: 30px;">
-    <div id="regular_slides">
-      <div class="slide last" id="page" style="width: 1920px; height: 1080px; left: 0px; z-index: 0;">
-        <div class="element" id="123" style="width: 863px; height: 396px; left: 58.5px; top: 58.5px; z-index: 2; background-color: #ccc;">
-          <div class="message_container animatable_wrapper callout" id="" style="width: 863px; height: 396px; background-color: #ccddee;">
+    <div id="regular_slides" style="width: 1920px; height: 1080px;">
+      <div class="slide" style="width: 1920px; height: 1080px; left: 0px; z-index: 0;">
+        <div class="element" style="left: 58.5px; top: 58.5px; background-color: #ccc;">
+          <div class="animatable_wrapper" style="width: 863px; height: 396px; background-color: #ccddee;">
             Hello World!<br/>
           </div>
         </div>
