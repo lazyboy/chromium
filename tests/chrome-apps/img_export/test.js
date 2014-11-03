@@ -13,12 +13,13 @@ var log = function(msg) {
   window.console.log(msg);
 };
 
-// Background page reads |inFileName| and sends the output to app.
-var inFileName = 'input.png';
-
+// Background page reads |req.fileName| and sends the output to app.
 chrome.runtime.onMessage.addListener(function(req, sender, sendResponse) {
   if (req.type == 'request-file') {
-    log('request-file');
+    var fileName = req.fileName;
+    log('request-file: ' + fileName);
+    var contentType = fileName.substr(-4) == '.png' ? 'image/png' : 'text/html';
+    log('contentType: ' + contentType);
     // Fetch file.
     var xhr = new XMLHttpRequest();
     xhr.addEventListener('readystatechange', function(e) {
@@ -29,10 +30,12 @@ chrome.runtime.onMessage.addListener(function(req, sender, sendResponse) {
         chrome.runtime.sendMessage({
           type: 'request-file-response',
           data: Array.apply(null, new Uint8Array(xhr.response)),
+          contentType: contentType,
+          outputFileName: 'out' + fileName
         });
       }
     });
-    xhr.open('GET', inFileName, true);
+    xhr.open('GET', fileName, true);
     xhr.responseType = 'arraybuffer';
     xhr.send();
   }
