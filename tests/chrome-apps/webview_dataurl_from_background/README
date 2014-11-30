@@ -1,0 +1,3 @@
+Loads a file as data URI using file selector and
+sets a webview's src to that data URI.
+
