@@ -33,11 +33,13 @@
 
   <div ng-app="AnotherApp" id="another-app"
        ng-controller="AnotherController as con">
-    <div>{{'hello' + 'world2'}}</div>
     <div>Controller value: {{con.value}}</div>
-    <div data-ng-bind="modelvalue"></div>
-    <div>obj.a follows:&nbsp;<span data-ng-bind="con.obj.a"></span></div>
-    <input type="text" ng-model="modelvalue" value="test"/>
+
+    <div ng-controller="EditTest as con">
+      <div data-ng-repeat="jsonDetail in data"
+           data-ng-include="'html/json-detail.html'">
+      </div>
+    </div>
   </div>
 </body>
 </html>
