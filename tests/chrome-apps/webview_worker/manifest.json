@@ -1,0 +1,22 @@
+{
+  "manifest_version": 2,
+  "name": "Web worker <webview>",
+  "version": "1",
+  "minimum_chrome_version": "23",
+  "permissions": [
+    "webview"
+  ],
+  "webview": {
+    "partitions": [
+      {
+        "name": "privileged",
+        "accessible_resources": ["*"]
+      }
+    ]
+  },
+  "app": {
+    "background": {
+      "scripts": ["test.js"]
+    }
+  }
+}
