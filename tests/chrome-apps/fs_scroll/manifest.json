@@ -1,0 +1,12 @@
+{
+  "manifest_version": 2,
+  "name": "Chrome app requestFullscreen bug check app",
+  "description": "This is a chrome app w/o fullscreen permission and an element inside the app requests fullscreen",
+  "version": "1",
+  "minimum_chrome_version": "38",
+  "app": {
+    "background": {
+      "scripts": ["test.js"]
+    }
+  }
+}

@@ -1,0 +1,9 @@
+.scrollable {
+  height: 100px;
+  overflow-y: scroll;
+  background-color: gray;
+}
+
+html, body {
+  overflow-y: visible;
+}

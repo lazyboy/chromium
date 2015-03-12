@@ -1,0 +1,11 @@
+This is a chrome app that demonstrates some html5 fullscreen API broken-ness in chrome apps.
+
+1) Try scrolling the page before and after clicking "requestFullscreen" button.
+  You won't be able to after you have clicked the button.
+
+2) document.webkitFullscreenEnabled = true, although neither the chrome app has
+  "fullscreen" permission nor it can/will go fullscreen.
+
+3) "requestFullscreen" results in a console warn:
+  "Is the 'app.window.fullscreen' permission appropriate? See http://developer.chrome.com/apps/declare_permissions.html.",
+  great, however we should also be dispatching a "webkitfullscreenerror" event.
