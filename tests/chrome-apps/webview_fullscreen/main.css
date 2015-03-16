@@ -1,0 +1,38 @@
+body {
+  background-color: gray;
+}
+
+/*
+    webview:-webkit-full-screen {
+      width: 100% !important;
+      height: 100% !important;
+    }
+*/
+
+#efullscreen:-webkit-full-screen {
+  width: 1000px;
+  height: 100%;
+  display: block;
+}
+
+#youtube:-webkit-full-screen {
+  width: 100% !important;
+  height: 100% !important;
+  /*height: 100%;*/
+}
+
+.webview-fs-container {
+  position: relative;
+  width: 100%;
+}
+
+webview {
+  display: block !important;
+}
+
+/*
+    :-webkit-full-screen .efullscreen {
+      width: 2200px !important;
+      height: 100% !important;
+    }
+*/

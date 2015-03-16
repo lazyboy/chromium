@@ -6,14 +6,26 @@
 <html>
 <head>
   <script type="text/javascript" src="main.js"></script>
+  <link rel="stylesheet" href="main.css"></script>
 </head>
 <body>
   <div>Embedder</div>
   <button type="button" id="e-button">Click for embedder to go fullscreen</button>
+  <button type="button" id="e-whole-button">Click for embedder.body to go fullscreen</button>
   <div id="efullscreen" style="border: 1px solid green">
       <div>Fullscren element in embedder</div>
       <div><button type="button" id="e-cancel-button">Cancel FS</button></div>
   </div>
-  <webview src="http://jsbin.com/ohamot/2" style="border: 1px solid gray; height: 120px;"></webview>
+  <!--<webview src="http://jsbin.com/ohamot/2" id="w1" style="border: 1px solid gray; height: 120px;"></webview>-->
+  <webview src="http://jsbin.com/dasadu/3" id="w2"
+      style="border: 1px solid yellow; height: 200px;"></webview>
+  <!-- # simple webview attach failure check.
+  <webview src="data:text/html,<body>Hello</body>" id="w3" style="border: 1px solid yellow; height: 120px;" id="simple-webview"></webview>
+  -->
+  <!--
+  <div class="webview-fs-container">
+  <webview src="https://www.youtube.com/watch?v=0QRO3gKj3qw" id="w4" style="width: 640px; height: 480px"></webview>
+  </div>
+  -->
 </body>
 </html>
