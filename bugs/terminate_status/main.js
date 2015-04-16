@@ -2,6 +2,12 @@ var LOG = function(msg) {
   window.console.log(msg);
 };
 
+var getEventListener = function(i) {
+  return function(e) {
+    LOG('EventListener: ' + i + ', reason: ' + e.reason);
+  };
+};
+
 var startTest = function() {
   LOG('startTest');
   var w = document.querySelectorAll('webview');
@@ -10,17 +16,11 @@ var startTest = function() {
     return;
   }
 
-  for (i = 0; i < w.length; ++i) {
+  for (var i = 0; i < w.length; ++i) {
     var ww = w[i];
-    ww.addEventListener('exit', function(e) {
-      LOG('exit called');
-    });
-    ww.terminate();
-    ww.terminate();
-    ww.terminate();
+    ww.addEventListener('exit', getEventListener(i));
     ww.terminate();
   }
-
 };
 
 onload = function() {

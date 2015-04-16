@@ -20,8 +20,8 @@ var increaseHeight = function() {
   H += step;
   LOG('Call increaseHeight, H = ' + H);
   var webview = document.querySelector('webview');
-  webview.setAttribute('maxheight', H + 'px');
-  window.setTimeout(increaseHeight, 10);
+  webview.setAttribute('maxheight', H);
+  window.setTimeout(increaseHeight, 40);
 };
 
 var setUp = function() {
