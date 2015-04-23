@@ -1,0 +1,23 @@
+{
+  "manifest_version": 2,
+  "name": "<webview> input",
+  "description": "<webview> with local resource",
+  "version": "1",
+  "minimum_chrome_version": "40",
+  "permissions": [
+    "webview"
+  ],
+  "app": {
+    "background": {
+      "scripts": ["test.js"]
+    }
+  },
+  "webview": {
+    "partitions": [
+      {
+        "name": "mypartition",
+        "accessible_resources": ["*"]
+      }
+    ]
+  }
+}
