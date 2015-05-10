@@ -16,7 +16,7 @@ window.onload = function() {
   });
 
   //awebview.src = getASrc();
-  awebview.src = 'http://jsbin.com/oGUYaxEY/1/';
+  //awebview.src = 'http://jsbin.com/oGUYaxEY/1/';
   bwebview.src = 'http://jsbin.com/uqePOGa/1/';
 
 };
