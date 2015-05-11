@@ -4,18 +4,23 @@ var LOG = function(msg) {
 
 var startTest = function() {
   LOG('startTest');
-  var w = document.querySelector('webview');
+  var w = document.querySelectorAll('webview');
   if (!w) {
     LOG('<webview> not found');
     return;
   }
-  w.addEventListener('exit', function(e) {
-    LOG('exit called');
-  });
-  w.terminate();
-  w.terminate();
-  w.terminate();
-  w.terminate();
+
+  for (i = 0; i < w.length; ++i) {
+    var ww = w[i];
+    ww.addEventListener('exit', function(e) {
+      LOG('exit called');
+    });
+    ww.terminate();
+    ww.terminate();
+    ww.terminate();
+    ww.terminate();
+  }
+
 };
 
 onload = function() {

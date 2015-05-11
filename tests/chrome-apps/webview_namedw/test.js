@@ -5,5 +5,5 @@
  * @see http://developer.chrome.com/trunk/apps/app.window.html
  */
 chrome.app.runtime.onLaunched.addListener(function() {
-  chrome.app.window.create('main.html', {id: 'angular-xyz'});
+  chrome.app.window.create('main.html', {width: 500, height: 300});
 });
