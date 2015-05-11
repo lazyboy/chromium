@@ -1,0 +1,13 @@
+{
+  "name": "Context Menus Sample (foo)",
+  "description": "Shows some of the features of the Context Menus API",
+  "version": "0.6",
+  "permissions": ["contextMenus"],
+   "icons": {
+      "16": "foo.png"
+   },
+  "background": {
+    "scripts": ["test.js"]
+  },
+  "manifest_version": 2
+}
