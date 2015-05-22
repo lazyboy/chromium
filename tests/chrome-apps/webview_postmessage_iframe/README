@@ -1,1 +1,17 @@
-New style simple (chromium) platform app.
+Test for postMessage to and from <webview>.
+
+The app is A.
+The app has an iframe I1.
+
+The webview is W.
+The webview also has an iframe I2.
+
+1) The test can send message to W from A or I1, but sending it
+  from I1 would result in event.source being null on the receiving
+  side.
+
+2) Once 1) is done, there's a channel to send message from
+  webview to the app, so it can
+  send message to A from W or I2.
+  However sending the message from I2 would result in null
+  event.source, similar to 1).
