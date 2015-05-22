@@ -1,6 +1,6 @@
 {
   "manifest_version": 2,
-  "name": "<webview> input",
+  "name": "<webview> with local resource",
   "description": "<webview> with local resource",
   "version": "1",
   "minimum_chrome_version": "40",

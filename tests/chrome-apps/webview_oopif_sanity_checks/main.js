@@ -8,6 +8,11 @@ var addWebview = function(src) {
   document.body.appendChild(w);
 };
 
+window.onmessage = function(e) {
+  LOG('Embedder got message');
+  LOG(e.data);
+};
+
 window.onload = function() {
   var inputBox = document.getElementById('input-url');
   document.getElementById('submit-button').onclick = function(e) {
@@ -26,9 +31,19 @@ window.onload = function() {
           LOG(results);
         });
   };
+  document.getElementById('postmessage-button').onclick = function(e) {
+    var valueToSend =
+        document.getElementById('postmessage-input').value || 'Uninitialized';
+    LOG('postmessage handler will send: ' + valueToSend);
+    debugger;
+    document.querySelector('webview').contentWindow.postMessage(
+        JSON.stringify(valueToSend), '*');
+  };
+  /*
   document.getElementById('message-button').onclick = function(e) {
     document.querySelector('webview').src = url;
   };
+  */
   /*
   // history is not available for packaged apps.
   var historyLengthButton = document.getElementById('history-length-button');

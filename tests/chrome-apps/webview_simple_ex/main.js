@@ -19,7 +19,7 @@ var addWebview = function(src) {
         });
   });
   w.addEventListener('consolemessage', function(e) {
-    LOG('[Guest]: ' + e.message);
+    LOG('[Guest (if you see this, then executeScript worked!)]: ' + e.message);
   });
 
   w.setAttribute('src', src);

@@ -1,0 +1,25 @@
+<!--
+ * Copyright 2015 The Chromium Authors. All rights reserved.  Use of this
+ * source code is governed by a BSD-style license that can be found in the
+ * LICENSE file.
+-->
+<html>
+<head>
+<script type="text/javascript" src="main.js"></script>
+</head>
+<body>
+  <h1>postMessage Embedder</h1>
+  <input type="text" value="One" id="ii"></input>
+  <button id="send-button">Send postMessage to guest</button>
+  <div id="log"></div>
+  <div>Last postMessage received: <span id="mstatus"></span></div>
+
+  <iframe src="iframe.html" width="60%"></iframe>
+
+  <h1>&lt;webview&gt;</h1>
+  <div style="border: 1px solid gray">
+    <webview src="http://lazyboy.github.io/pages/post_message_source/top.html" style="width: 80%"></webview>
+  </div>
+
+</body>
+</html>
