@@ -1,0 +1,12 @@
+{
+  "name": "Appview Embeder",
+  "manifest_version": 2,
+  "version": "1.0",
+  "offline_enabled": true,
+  "app": {
+    "background": {
+      "page": "main.html"
+    }
+  },
+  "permissions": [ "appview" ]
+}
