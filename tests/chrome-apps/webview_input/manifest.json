@@ -2,11 +2,12 @@
   "manifest_version": 2,
   "name": "<webview> input",
   "description": "<webview> with input elements.",
-  "version": "1",
+  "version": "2",
   "minimum_chrome_version": "23",
   "permissions": [
     "webview"
   ],
+  "content_security_policy": "object-src 'none'",
   "app": {
     "background": {
       "scripts": ["test.js"]

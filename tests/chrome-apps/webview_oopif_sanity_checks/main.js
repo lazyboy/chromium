@@ -14,6 +14,11 @@ window.onmessage = function(e) {
 };
 
 window.onload = function() {
+  var closeButton = document.getElementById('close-button');
+  closeButton.onclick = function() {
+    LOG('closing app');
+    window.close();
+  };
   var inputBox = document.getElementById('input-url');
   document.getElementById('submit-button').onclick = function(e) {
     var url = inputBox.value;
@@ -38,6 +43,11 @@ window.onload = function() {
     debugger;
     document.querySelector('webview').contentWindow.postMessage(
         JSON.stringify(valueToSend), '*');
+  };
+  document.getElementById('remove1-button').onclick = function() {
+    window.console.log('removing');
+    var w1 = document.querySelector('webview');
+    w1.parentNode.removeChild(w1);
   };
   /*
   document.getElementById('message-button').onclick = function(e) {

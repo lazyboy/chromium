@@ -37,8 +37,20 @@ var testSpeech = function() {
   r.start();
 };
 
+var otherLoad = function() {
+  var webview = document.getElementById('otherid');
+  if (!webview) { LOG('FATAL: <webview> element not found'); }
+  webview.onpermissionrequest = function(e) {
+    LOG('ebmedder.permissionrequest[google speech], permission: ' + e.permission);
+    e.request.allow();
+  };
+};
+
 window.onload = function() {
   window.console.log('onload');
+
+  otherLoad();
+
   var el = document.getElementById('sid');
   if (!el) { window.console.log('element not found'); return; }
   el.onspeechchange = function() { window.console.log('**** onspeechchange'); }
