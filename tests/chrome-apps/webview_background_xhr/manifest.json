@@ -1,0 +1,16 @@
+{
+  "manifest_version": 2,
+  "name": "<webview> XHR from Background page",
+  "description": "<webview> XHR from Background page",
+  "version": "1",
+  "minimum_chrome_version": "40",
+  "permissions": [
+    "webview",
+    "http://www.xul.fr/*"
+  ],
+  "app": {
+    "background": {
+      "scripts": ["test.js"]
+    }
+  }
+}
