@@ -1,0 +1,17 @@
+{
+  "manifest_version": 2,
+  "name": "<webview> Play video from downloaded file",
+  "description": "Hello world",
+  "version": "2",
+  "minimum_chrome_version": "40",
+  "permissions": [
+    "http://techslides.com/*",
+    "unlimitedStorage",
+    "webview"
+  ],
+  "app": {
+    "background": {
+      "scripts": ["test.js"]
+    }
+  }
+}
