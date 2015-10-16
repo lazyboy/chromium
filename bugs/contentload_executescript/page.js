@@ -25,8 +25,13 @@ Test.prototype.runInternal_ = function(webview) {
       {code: 'window.console.log("hello");'}, function(results) {
         if (!results) {
           window.console.log('FATAL: failed ' + runCount);
+        } else {
+          window.console.log('PASS: ' + runCount);
         }
     });
+  };
+  webview.onconsolemessage = function(e) {
+    window.console.log('G: ' + e.message);
   };
   webview.src = 'http://www.google.ca';
 };
