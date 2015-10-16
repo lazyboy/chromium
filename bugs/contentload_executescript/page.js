@@ -9,8 +9,7 @@ Test.prototype.run = function() {
   // Javascript created webview.
   var jsWebview = new WebView();
   document.body.appendChild(jsWebview);
-  this.runInternal_(jsWebview);
-
+  this.runInternal_(jsWebview); 
   // Javascript DOM webview.
   var jsDOMWebview = document.createElement('webview');
   document.body.appendChild(jsDOMWebview);
@@ -37,6 +36,11 @@ Test.prototype.runInternal_ = function(webview) {
 };
 
 window.onload = function() {
+  //var tester = new Test();
+  //tester.run();
+};
+
+document.addEventListener('DOMContentLoaded', function(e) {
   var tester = new Test();
   tester.run();
-};
+});
