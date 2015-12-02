@@ -2,16 +2,15 @@ Flow to test extension update locally (w/o Web Store).
 ------------------------------------------------------
 
 ### Directory contents: ###
-----        ------------------------------
-What        Description
-----        ------------------------------
-1.0/        unpacked v1.0 of the extension
-1.1/        unpacked v1.1 of the extension
-1.0.crx     packed version of 1.0
-1.1.crx     packed version of 1.1
-1.1.pem     private key used for packing
-updates.xml update url
-----        ------------------------------
+|----|-----------------------------|
+|What | Description |
+|----|------------------------------|
+1.0/ | unpacked v1.0 of the extension |
+1.1/ | unpacked v1.1 of the extension |
+1.0.crx | packed version of 1.0 |
+1.1.crx | packed version of 1.1 |
+1.1.pem | private key used for packing |
+updates.xml | update url |
 
 ### Usage: ###
 * The extension id would be: kceeijgopjjdcemmehgjnohdekkmghgh
