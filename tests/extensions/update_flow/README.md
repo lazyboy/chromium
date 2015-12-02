@@ -2,9 +2,8 @@ Flow to test extension update locally (w/o Web Store).
 ------------------------------------------------------
 
 ### Directory contents: ###
-|----|-----------------------------|
-|What | Description |
-|----|------------------------------|
+What | Description |
+----|------------------------------|
 1.0/ | unpacked v1.0 of the extension |
 1.1/ | unpacked v1.1 of the extension |
 1.0.crx | packed version of 1.0 |
