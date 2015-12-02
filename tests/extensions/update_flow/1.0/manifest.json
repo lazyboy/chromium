@@ -1,0 +1,9 @@
+{
+  "version": "1.0",
+  "name": "Permission Test Extension",
+  "background": {
+    "page": "background.html"
+  },
+  "update_url": "http://127.0.0.2/autoupdate/simple_extension/updates.xml",
+  "manifest_version": 2
+}

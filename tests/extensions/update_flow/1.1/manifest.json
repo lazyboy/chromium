@@ -1,0 +1,13 @@
+{
+  "version": "1.1",
+  "name": "Permission Test Extension",
+  "background": {
+    "page": "background.html"
+  },
+  "update_url": "http://127.0.0.2/autoupdate/simple_extension/updates.xml",
+  "permissions": [
+    "bookmarks",
+    "http://*.flickr.com"
+  ],
+  "manifest_version": 2
+}
