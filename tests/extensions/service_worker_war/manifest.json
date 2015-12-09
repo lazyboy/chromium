@@ -1,0 +1,8 @@
+{
+  "name": "Extension with web accessible resources handled by Service Worker",
+  "version": "0.0.1",
+  "web_accessible_resources": [
+    "hello.txt"
+  ],
+  "manifest_version": 2
+}
