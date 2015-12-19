@@ -1,0 +1,10 @@
+Simple fetch test using ServiceWorker.
+
+Load the extension, then note its id.
+Navigate to chrome-extension://<id>/page.html
+Click on the "Register ServiceWorker" button to register a SW.
+Close the tab.
+Open a new tab.
+Navigate again to chrome-extension://<id>/page.html
+(this is to ensure that the Service Worker is now controlling the extension page).
+Click on "Test simple fetch"
