@@ -46,14 +46,31 @@ var otherLoad = function() {
   };
 };
 
+var allowSpeech = function(webviewElement) {
+  webviewElement.addEventListener('permissionrequest',
+      function(e) {
+    console.log('webview requests permission: ' + e.type);
+    if (e.permission === 'media') {
+      console.log('allowing media permission');
+      e.request.allow();
+      return;
+    }
+  });
+};
+
 window.onload = function() {
   window.console.log('onload');
 
   otherLoad();
+  allowSpeech(document.getElementById('google-speech-demo'));
 
   var el = document.getElementById('sid');
-  if (!el) { window.console.log('element not found'); return; }
-  el.onspeechchange = function() { window.console.log('**** onspeechchange'); }
+  if (el) {
+    el.onspeechchange = function() { window.console.log('**** onspeechchange'); }
+  } else {
+    window.console.log('element not found'); return;
+  }
+  window.console.log('adding guest');
   addGuest();
 
   document.getElementById('check-emb-api').onclick = function(e) {
