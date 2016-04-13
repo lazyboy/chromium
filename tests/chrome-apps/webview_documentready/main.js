@@ -1,5 +1,6 @@
 var LOG = function(msg) { window.console.log(msg); };
 
+
 var doTest = function() {
   LOG('doTest');
   var w = document.querySelector('webview');
@@ -7,8 +8,7 @@ var doTest = function() {
 
   Object.defineProperty(w, 'name', {
     get: function() { return 'abc'; },
-    set: function(value) {},
-    enumerable: true
+    set: function(value) {}, enumerable: true
   });
 };
 
@@ -24,5 +24,10 @@ document.addEventListener('DOMContentLoaded', function(e) {
 
 window.onload = function() {
   LOG('window.onload');
+  document.getElementById('open').onclick = function() {
+    window.open(
+        'chrome-extension://hcopflpnddjdbddphocgkfkhlpoclcgb/main.html',
+        '_self');
+  };
 };
 
