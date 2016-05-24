@@ -1,0 +1,16 @@
+{
+  "name": "content-script Button to test sendMessage",
+  "version": "1.0",
+  "content_scripts": [{
+    "matches": ["http://127.0.0.3/*"],
+    "js": ["content_script.js"]
+  }],
+  "background": {
+    "scripts": ["event_page.js"],
+    "persistent": false
+  },
+  "permissions": [
+    "activeTab"
+  ],
+  "manifest_version": 2
+}
