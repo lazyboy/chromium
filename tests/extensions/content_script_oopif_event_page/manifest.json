@@ -12,5 +12,9 @@
   "permissions": [
     "activeTab"
   ],
+  "web_accessible_resources": [
+    "event_page.html",
+    "event_page.js"
+  ],
   "manifest_version": 2
 }

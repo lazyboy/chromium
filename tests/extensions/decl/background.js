@@ -1,4 +1,10 @@
 var show = new chrome.declarativeContent.ShowPageAction();
+var staticCondition = new chrome.declarativeContent.PageStateMatcher({
+  pageUrl: {
+    hostEquals: '127.0.0.3'
+  }
+});
+
 var match_rules = [
   {
     conditions: [
@@ -8,7 +14,7 @@ var match_rules = [
         }
       })
     ],
-    actions: [ show ]
+    actions: [ show]
   },
   {
     conditions: [
@@ -18,8 +24,12 @@ var match_rules = [
         }
       })
     ],
-    actions: [ show, show ]
-  }
+    actions: [ show]
+  }/*,
+  {
+    conditions: [ staticCondition, staticCondition ],
+    actions: [show]
+  }*/
 ];
 
 chrome.runtime.onInstalled.addListener(function() {
