@@ -4,6 +4,9 @@
   "description": "alarms test",
   "version": "2",
   "minimum_chrome_version": "45",
+  "permissions": [
+    "alarms"
+  ],
   "app": {
     "background": {
       "scripts": ["background.js"]
