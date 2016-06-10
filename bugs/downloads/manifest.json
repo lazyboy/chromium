@@ -1,0 +1,11 @@
+{
+  "name": "chrome.downloads [crbug 497754]",
+  "version": "1.0",
+  "background": {
+    "scripts": ["background.js"]
+  },
+  "permissions": [
+    "downloads"
+  ],
+  "manifest_version": 2
+}
