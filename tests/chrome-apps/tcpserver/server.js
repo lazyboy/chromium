@@ -34,13 +34,15 @@ Server.acceptCallback_ = function(tcpConnection, socketInfo) {
         //log.output(info);
         console.log(info);
 
-        // Echo.
-        console.log('Sending echo');
-        try {
-          tcpConnection.sendMessage(info);
-        } catch (ex) {
-          tcpConnection.sendMessage(ex);
-        }
+        setTimeout(function() {
+          // Echo.
+          console.log('Sending echo');
+          try {
+            tcpConnection.sendMessage(info);
+          } catch (ex) {
+            tcpConnection.sendMessage(ex);
+          }
+        }, 3000);
       }
     }
   });
