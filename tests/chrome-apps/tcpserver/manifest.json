@@ -1,0 +1,17 @@
+{
+  "manifest_version": 2,
+  "name": "TCP server",
+  "description": "TCP server",
+  "version": "2",
+  "minimum_chrome_version": "23",
+  "sockets": {
+    "tcpServer": {
+      "listen": ""
+    }
+  },
+  "app": {
+    "background": {
+      "scripts": ["test.js"]
+    }
+  }
+}
