@@ -42,7 +42,7 @@ Server.acceptCallback_ = function(tcpConnection, socketInfo) {
           } catch (ex) {
             tcpConnection.sendMessage(ex);
           }
-        }, 3000);
+        }, 10000);
       }
     }
   });
