@@ -1,0 +1,15 @@
+{
+  "name": "Stress test tabs.executeScript",
+  "description": "Flood with content script, testing tabs.executeScript",
+  "version": "1.0",
+  "manifest_version": 2,
+  "permissions": ["alarms", "tabs", "bookmarks", "declarativeWebRequest", "*://*/*"],
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+  "browser_action": {
+    "default_icon" : "icon.png",
+    "default_title": "Start Event Page"
+  }
+}
