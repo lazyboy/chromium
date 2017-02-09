@@ -1,6 +1,7 @@
 {
   "name": "Page Redder",
   "version": "2.0",
+  "key": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDasz2sLsAlmcF0v7/FGwzWVP/T+CLhvWpojKckVp8RH0bN/x3HvQ8FUweTymsaLbqxMHn8LbMOYt9uvLg7MuUcs0puzo7vPEwW7FPwLdIke2Fth+uXgkBFUFvtrOoAyIXmiRRFoIi9qfNVQOvIz0nv0c7UEKoHT3UnT0ekxSl7lwIDAQAB",
   "permissions": [
     "activeTab",
     "tabs",
