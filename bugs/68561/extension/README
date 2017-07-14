@@ -1,0 +1,12 @@
+Repro for crbug.com/68561
+
+Install unpacked extension.
+Navigate to https://guides.github.com/features/pages/ [1]
+
+You should see the background color turning gray (css content script)
+  and a white div that says "Content script" (js content script)
+
+The match pattern that was used is:
+  matches": ["*://guides.github.com/feature*page*"],
+which should affect the page [1] and both JS and CSS content scripts
+  should be applied.

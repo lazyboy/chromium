@@ -1,0 +1,19 @@
+{
+  "name": "CRBUG 48561",
+  "version": "1.0",
+  "content_scripts": [
+  {
+    "matches": ["*://guides.github.com/feature*page*"],
+    "css": ["css.css"],
+    "js" : ["js.js"]
+  ],
+  "background": {
+    "scripts": ["event_page.js"],
+    "persistent": false
+  },
+  "permissions": [
+    "activeTab"
+  ],
+  "manifest_version": 2
+}
+
