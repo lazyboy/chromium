@@ -1,0 +1,12 @@
+{
+  "manifest_version": 2,
+  "name": "App events",
+  "version": "1",
+  "minimum_chrome_version": "58",
+  "permissions": [ "contextMenus", "alarms" ],
+  "app": {
+    "background": {
+      "scripts": ["test.js"]
+    }
+  }
+}
