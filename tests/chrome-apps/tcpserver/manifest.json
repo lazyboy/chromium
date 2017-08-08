@@ -9,6 +9,11 @@
       "listen": ""
     }
   },
+  "externally_connectable": {
+    "matches": [
+      "https://*.google.com/*"
+    ]
+  },
   "app": {
     "background": {
       "scripts": ["test.js"]
