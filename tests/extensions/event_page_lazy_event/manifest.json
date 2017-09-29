@@ -1,0 +1,11 @@
+{
+  "name": "Event page chrome.tabs API",
+  "description": "Testing chrome.tabs.onCreated",
+  "version": "0.0.3",
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+  "permissions": ["tabs", "<all_urls>"],
+  "manifest_version": 2
+}

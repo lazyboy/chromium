@@ -1,0 +1,15 @@
+Demonstrating the necessity of prefs/EventRouter::GetRegisteredEvents.
+
+Install the extension and create a new tab.
+Observe that onCreated listener fires.
+
+Restart chrome.
+Create a new tab.
+
+Case A (default):
+listener fires.
+
+Case B:
+Make EventRouter::GetRegisteredEvents() no-op, returning and empty
+std::set<std::string>.
+listener won't fire.
